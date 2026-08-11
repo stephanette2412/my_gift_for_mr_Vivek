@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Gift For You, mr Vivek 💗</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #120d20, #251536, #17152d);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* SAO */
+.star {
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+    z-index: 0;
+}
+
+@keyframes twinkle {
+    from { opacity: .2; transform: scale(.7); }
+    to { opacity: 1; transform: scale(1.4); }
+}
+
+/* TRANG MỞ ĐẦU */
+#intro {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, #33204c, #100b19);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transition: opacity 1s ease;
+}
+
+#intro h1 {
+    font-size: 30px;
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.gift {
+    font-size: 100px;
+    cursor: pointer;
+    animation: float 2s infinite ease-in-out;
+    transition: transform .3s;
+}
+
+.gift:hover {
+    transform: scale(1.15);
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+#intro p {
+    color: #d9c9e9;
+}
+
+/* TRANG CHÍNH */
+#main {
+    display: none;
+    min-height: 100vh;
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.title {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #cfc0db;
+    margin-bottom: 45px;
+}
+
+/* CARD */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 350px));
+    justify-content: center;
+    gap: 25px;
+}
+
+.card {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.12);
+    backdrop-filter: blur(12px);
+    border-radius: 25px;
+    padding: 30px 20px;
+    cursor: pointer;
+    transition: .35s;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    background: rgba(255,255,255,.13);
+}
+
+.card .emoji {
+    font-size: 50px;
+}
+
+.card h2 {
+    margin: 15px 0 8px;
+}
+
+.card p {
+    color: #cfc4d8;
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(5,3,10,.82);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 50;
+}
+
+.modal-box {
+    max-width: 600px;
+    width: 100%;
+    background: linear-gradient(145deg,#302040,#1c1628);
+    border-radius: 28px;
+    padding: 35px;
+    text-align: center;
+    box-shadow: 0 20px 70px rgba(0,0,0,.5);
+    animation: popup .4s ease;
+}
+
+@keyframes popup {
+    from {
+        opacity: 0;
+        transform: scale(.8) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-box h2 {
+    font-size: 30px;
+}
+
+.message {
+    line-height: 1.8;
+    color: #e4dbea;
+    font-size: 17px;
+}
+
+.close {
+    margin-top: 25px;
+    padding: 11px 25px;
+    border: none;
+    border-radius: 20px;
+    background: #d9a7ff;
+    color: #21152c;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.close:hover {
+    background: #efcfff;
+}
+
+/* ẢNH */
+.photo {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin: 15px auto;
+    display: block;
+    border: 3px solid rgba(255,255,255,.2);
+}
+
+/* ONE MORE THING */
+#finalButton {
+    margin-top: 50px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(90deg,#ffb7d5,#caa7ff);
+    color: #25172e;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+#finalButton:hover {
+    transform: scale(1.07);
+}
+
+/* TIM BAY */
+.heart {
+    position: fixed;
+    bottom: -30px;
+    font-size: 20px;
+    pointer-events: none;
+    animation: heartFly 4s linear forwards;
+    z-index: 20;
+}
+
+@keyframes heartFly {
+    0% {
+        transform: translateY(0) scale(.7);
+        opacity: 0;
+    }
+    15% { opacity: 1; }
+    100% {
+        transform: translateY(-100vh) translateX(80px) scale(1.3);
+        opacity: 0;
+    }
+}
+
+/* MOBILE */
+@media(max-width: 700px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+        font-size: 30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SAO -->
+<script>
+for(let i = 0; i < 80; i++){
+    const star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random()*100 + "%";
+    star.style.top = Math.random()*100 + "%";
+    star.style.animationDelay = Math.random()*2 + "s";
+    document.body.appendChild(star);
+}
+</script>
+
+<!-- TRANG MỞ ĐẦU -->
+<div id="intro">
+    <h1>A little something for you..., my love 💌</h1>
+
+    <div class="gift" onclick="openGift()">
+        🎁
+    </div>
+
+    <p>click the gift ✨</p>
+</div>
+
+
+<!-- TRANG CHÍNH -->
+<div id="main">
+
+    <h1 class="title">For You, mr Vivek 💗</h1>
+
+    <p class="subtitle">
+        There are a few things I wanted you to know...
+    </p>
+
+    <div class="cards">
+
+        <div class="card" onclick="openMessage('sad')">
+            <div class="emoji">🌧️</div>
+            <h2>Open when you're sad</h2>
+            <p>For the difficult days.</p>
+        </div>
+
+        <div class="card" onclick="openMessage('miss')">
+            <div class="emoji">🌙</div>
+            <h2>Open when you miss me</h2>
+            <p>For the nights you feel a little lonely.</p>
+        </div>
+
+        <div class="card" onclick="openMessage('motivation')">
+            <div class="emoji">🔥</div>
+            <h2>Open when you need motivation</h2>
+            <p>For when things get difficult.</p>
+        </div>
+
+        <div class="card" onclick="openMessage('birthday')">
+            <div class="emoji">🎂</div>
+            <h2>Open on your birthday</h2>
+            <p>For your special day.</p>
+        </div>
+
+    </div>
+
+    <button id="finalButton" onclick="openFinal()">
+        One more thing... ✨
+    </button>
+
+</div>
+
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="modal-box">
+
+        <h2 id="modalTitle"></h2>
+
+        <!--
+        ĐỔI ẢNH:
+        Thay "your-photo.jpg" bằng tên ảnh của em.
+        -->
+        <img
+            src="your-photo.jpg"
+            class="photo"
+            onerror="this.style.display='none'"
+        >
+
+        <p class="message" id="modalMessage"></p>
+
+        <button class="close" onclick="closeMessage()">
+            Close 💗
+        </button>
+
+    </div>
+</div>
+
+
+<!-- NHẠC -->
+<audio id="music" loop>
+    <!-- Đổi music.mp3 thành tên file nhạc của em -->
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+
+<script>
+
+function openGift(){
+
+    const intro = document.getElementById("intro");
+    const main = document.getElementById("main");
+
+    intro.style.opacity = "0";
+
+    setTimeout(() => {
+        intro.style.display = "none";
+        main.style.display = "block";
+    }, 900);
+
+    const music = document.getElementById("music");
+
+    music.play().catch(() => {
+        console.log("Browser blocked autoplay.");
+    });
+
+    startHearts();
+}
+
+
+const messages = {
+
+    sad: {
+        title: "🌧️ When you're sad",
+        text: `
+        Hey... it's okay to have bad days.<br><br>
+
+        You don't have to pretend that everything is fine
+        all the time.<br><br>
+
+        Take a breath. Rest for a while. I'm staying here with you.
+        Tomorrow doesn't have to be perfect either.<br><br>
+
+        Just remember that difficult moments don't last forever. 💗
+        `
+    },
+
+    miss: {
+        title: "🌙 When you miss me",
+        text: `
+        If you're reading this because you miss me...(i guess🤭)<br><br>
+
+        then imagine this little page is me, your cupcake🤭
+        where you can come back whenever you want. ✨<br><br>
+
+        Somewhere between all these stars,
+        there's a little reminder that you're not forgotten. 💌
+        `
+    },
+
+    motivation: {
+        title: "🔥 You can do this",
+        text: `
+        Hey, don't give up yet.<br><br>
+
+        You don't need to have everything figured out.
+        Just take one step at a time.<br><br>
+
+        Even slow progress is still progress.<br><br>
+
+        Keep going. I'm rooting for you. 🌟
+        `
+    },
+
+    birthday: {
+        title: "🎂 Happy Birthday!",
+        text: `
+        Happy Birthday!! 🎉<br><br>
+
+        I hope this new year of your life brings you
+        lots of beautiful memories, good surprises,
+        and plenty of reasons to smile. And you are not old man🤭<br><br>
+
+        Keep being you. 💗<br><br>
+
+        Today is your day, so enjoy every little moment! ✨
+        `
+    }
+
+};
+
+
+function openMessage(type){
+
+    const modal = document.getElementById("modal");
+    const title = document.getElementById("modalTitle");
+    const message = document.getElementById("modalMessage");
+
+    title.innerHTML = messages[type].title;
+    message.innerHTML = messages[type].text;
+
+    modal.style.display = "flex";
+
+    if(type === "birthday"){
+        confetti();
+    }
+}
+
+
+function closeMessage(){
+    document.getElementById("modal").style.display = "none";
+}
+
+
+function openFinal(){
+
+    const modal = document.getElementById("modal");
+    const title = document.getElementById("modalTitle");
+    const message = document.getElementById("modalMessage");
+
+    title.innerHTML = "✨ One more thing...";
+
+    message.innerHTML = `
+        Thank you for being here 💗<br><br>
+
+        I hope whenever you come back to this little place, I feel like i love you more than the sentence 'i love you'.
+        you'll remember that someone is always cheering for you. I love you so much, mr Vivek🤭<br><br>
+
+        Take care of yourself, okeyy?<br><br>
+
+        <strong>You matter more than you think 🌙</strong>
+    `;
+
+    modal.style.display = "flex";
+
+    confetti();
+}
+
+
+/* TIM BAY */
+function startHearts(){
+
+    setInterval(() => {
+
+        const heart = document.createElement("div");
+
+        heart.className = "heart";
+
+        const hearts = ["💗","💖","💕","✨","🌸"];
+
+        heart.innerHTML =
+            hearts[Math.floor(Math.random()*hearts.length)];
+
+        heart.style.left = Math.random()*100 + "%";
+        heart.style.animationDuration =
+            (3 + Math.random()*3) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+
+    }, 700);
+
+}
+
+
+/* PHÁO GIẤY */
+function confetti(){
+
+    for(let i = 0; i < 80; i++){
+
+        const piece = document.createElement("div");
+
+        piece.style.position = "fixed";
+        piece.style.width = "8px";
+        piece.style.height = "14px";
+        piece.style.left = Math.random()*100 + "vw";
+        piece.style.top = "-20px";
+        piece.style.background =
+            `hsl(${Math.random()*360}, 90%, 70%)`;
+
+        piece.style.zIndex = "200";
+        piece.style.transform =
+            `rotate(${Math.random()*360}deg)`;
+
+        document.body.appendChild(piece);
+
+        const fall = piece.animate(
+            [
+                { transform: "translateY(0) rotate(0deg)" },
+                {
+                    transform:
+                    `translateY(110vh) rotate(${Math.random()*720}deg)`
+                }
+            ],
+            {
+                duration: 2000 + Math.random()*2500,
+                easing: "linear"
+            }
+        );
+
+        fall.onfinish = () => piece.remove();
+    }
+}
+
+</script>
+
+</body>
+</html>
